@@ -1,0 +1,17 @@
+RewriteEngine on
+
+
+
+<IfModule mod_rewrite.c>
+    RewriteBase /
+
+    RewriteCond %{HTTP_HOST} ^www.example.com$ [NC]
+    RewriteRule ^(.*)$ http://example.com/$1 [R=301,L]
+    
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /index.php
+</IfModule>
